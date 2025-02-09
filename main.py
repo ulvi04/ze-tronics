@@ -102,7 +102,7 @@ def start_quiz():
 def check_code():
     user_code = request.form.get('code')
     
-    if user_code == session.get('quiz_code'):
+    if user_code == quiz_code:
         return redirect(url_for('quiz'))  # Doğru kod girildi, quiz başlasın
     else:
         return "<script>alert('Kod Yanlış! Lütfen tekrar deneyin.'); window.location.href='/';</script>"
