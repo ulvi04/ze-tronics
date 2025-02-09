@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli</title>
+</head>
+<body>
+    <h2>Test Sonuçları</h2>
+    <table border="1">
+        <tr>
+            <th>İsim Soyisim</th>
+            <th>Doğru</th>
+            <th>Yanlış</th>
+            <th>Boş</th>
+        </tr>
+        {% for user, stats in results.items() %}
+        <tr>
+            <td>{{ user }}</td>
+            <td>{{ stats.correct }}</td>
+            <td>{{ stats.incorrect }}</td>
+            <td>{{ stats.empty }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

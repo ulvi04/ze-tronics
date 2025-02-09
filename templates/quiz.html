@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="az">
+<!-- Mirrored from personal.osim.az/result/698859/60ccbe09-e494-4a6c-a835-8a33bf9ddda9 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Feb 2025 19:11:26 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ name }} {{ surname }}</title>
+</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='assets/favicon/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='assets/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='assets/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/favicon/favicon-16x16.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/resultcc59.css', version='241009') }}">    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+        });
+    </script>
+    
+    <script>
+        // Sayfa kapanırken veya sekme değişirken "Reload site?" uyarısını göstermemek için kontrol mekanizması
+        let sayfaTerkEdiliyor = false;
+    
+        window.addEventListener("beforeunload", function (event) {
+            if (sayfaTerkEdiliyor) {
+                event.preventDefault();
+                event.returnValue = "";
+            }
+        });
+    
+        // Kullanıcı sekmeden çıkmaya çalıştığında veya sayfayı kapattığında
+        window.onbeforeunload = function (event) {
+            if (sayfaTerkEdiliyor) {
+                return "Bu sayfayı terk etmek istediğinizden emin misiniz?";
+            }
+        };
+    
+        // Kullanıcı belirli bir işlemi yapmadan sayfayı kapatırsa uyarı çıkmasını engelle
+        setTimeout(() => {
+            sayfaTerkEdiliyor = false;
+        }, 1000);
+    
+        // Geri ve ileri gitmeyi engelle
+        function disableBackForward() {
+            history.pushState(null, null, location.href);
+            setTimeout(() => {
+                history.pushState(null, null, location.href);
+            }, 0);
+        }
+        disableBackForward();
+        window.addEventListener("popstate", function () {
+            disableBackForward();
+            alert("Bu sayfada geri gitmek yasaktır!");
+        });
+    
+        // **F5, Ctrl+R ve yenilemeyi engelle**
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "F5" || (event.ctrlKey && event.key === "r")) {
+                event.preventDefault();
+                alert("Bu sayfayı yenilemek yasaktır!");
+            }
+        });
+    
+        // **Sağ tıklamayı engelle**
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+            alert("Sağ tıklama devre dışı bırakılmıştır!");
+        });
+    
+        // **Tarayıcı yenileme butonunu (⟳) devre dışı bırakmak için sürekli URL güncelle**
+        setInterval(function () {
+            history.pushState(null, null, location.href);
+        }, 1000);
+    
+        // **Form submit işlemlerini ve buton tıklayınca sayfa yenilemeyi engelle**
+        document.addEventListener("submit", function (event) {
+            event.preventDefault();
+            alert("Form gönderimi devre dışı bırakılmıştır!");
+        });
+    </script>
+    
+    
+    
+    <style>
+        .play-link {
+            float: left;
+            text-decoration: none;
+            color: red;
+            display: inline-block;
+            padding: 0.05em 0.5em 0.2em;
+            border: 1px solid;
+            border-radius: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <ul class="exam-summary">
+            <li class="exam-summary__subject">
+                <ul class="exam-summary__questions">
+                        {% for question in questions %}
+                            <li>
+                                <a href="#q{{ question.id }}" class="exam-summary__question">
+                                </a>
+                            </li>
+                        {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <article class="result">
+        <div class="container">
+            <div class="result__header">
+                <h2>{{ name }} {{ surname }}</h2>
+                <p id="timer">Sizin 1 saat 30 dəqiqə 0 saniyə vaxtınız qalıb.</p>
+                               
+            </div>
+            <ul class="result__subjects">
+                <li class="subject">
+                    <ul class="subject__questions">
+                        <form id="quiz-form" method="POST">
+                            {% for question in questions %}
+                                <li id="q{{ question.id }}" class="question right">
+                                    {{ question.text }}
+                                </li>
+                                <input type="radio" name="question_{{ question.id }}" value="A" id="q{{ question.id }}_A">
+                                <label for="q{{ question.id }}_A" style="color: blue; font-weight: bold;">{{ question.option_a }}</label><br>
+                                
+                                <input type="radio" name="question_{{ question.id }}" value="B" id="q{{ question.id }}_B">
+                                <label for="q{{ question.id }}_B" style="color: blue; font-weight: bold;">{{ question.option_b }}</label><br>
+                                
+                                <input type="radio" name="question_{{ question.id }}" value="C" id="q{{ question.id }}_C">
+                                <label for="q{{ question.id }}_C" style="color: blue; font-weight: bold;">{{ question.option_c }}</label><br>
+                                
+                                <input type="radio" name="question_{{ question.id }}" value="D" id="q{{ question.id }}_D">
+                                <label for="q{{ question.id }}_D" style="color: blue; font-weight: bold;">{{ question.option_d }}</label><br>
+                                
+                                <input type="radio" name="question_{{ question.id }}" value="E" id="q{{ question.id }}_E">
+                                <label for="q{{ question.id }}_E" style="color: blue; font-weight: bold;">{{ question.option_e }}</label><br>
+                                
+                            {% endfor %}
+                            <button type="submit">Testi Bitir</button>
+                        </form>
+                    </ul>
+                    
+                </li>
+            </ul>
+        </div>
+    </article>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const radioButtons = document.querySelectorAll("input[type='radio']");
+            const timerElement = document.getElementById("timer");
+            let timer, storedTime, startTime;
+    
+            // Keçmiş cavabları yüklə
+            radioButtons.forEach(radio => {
+                let storedValue = localStorage.getItem(radio.name);
+                if (storedValue && radio.value === storedValue) {
+                    radio.checked = true;
+                }
+    
+                // Yeni cavab seçildikdə yadda saxla
+                radio.addEventListener("change", function () {
+                    localStorage.setItem(this.name, this.value);
+                });
+            });
+    
+            // Vaxtı yadda saxlayan və davam etdirən funksiya
+            function startTimer() {
+                storedTime = localStorage.getItem("timeRemaining");
+                startTime = localStorage.getItem("startTime");
+    
+                if (!storedTime || !startTime) {
+                    localStorage.setItem("timeRemaining", 5400); // 1 saat 30 dəqiqə
+                    localStorage.setItem("startTime", Date.now());
+                    storedTime = 5400;
+                } else {
+                    let elapsedTime = Math.floor((Date.now() - parseInt(startTime)) / 1000);
+                    storedTime = Math.max(0, parseInt(storedTime) - elapsedTime);
+                }
+    
+                function updateTimer() {
+                    let hours = Math.floor(storedTime / 3600);
+                    let minutes = Math.floor((storedTime % 3600) / 60);
+                    let seconds = storedTime % 60;
+    
+                    timerElement.textContent = `Sizin ${hours} saat ${minutes} dəqiqə ${seconds} saniyə vaxtınız qalıb.`;
+    
+                    if (storedTime <= 0) {
+                        clearInterval(timer);
+                        localStorage.removeItem("timeRemaining");
+                        localStorage.removeItem("startTime");
+                        alert("İmtahan vaxtı bitdi!");
+                        document.getElementById("quiz-form").submit();
+                    } else {
+                        storedTime--;
+                        localStorage.setItem("timeRemaining", storedTime);
+                    }
+                }
+    
+                timer = setInterval(updateTimer, 1000);
+            }
+    
+            startTimer();
+    
+            // Sayt tam bağlananda (başqa səhifəyə keçəndə) cavabları və vaxtı sil
+            window.addEventListener("visibilitychange", function () {
+                if (document.visibilityState === "hidden") {
+                    localStorage.clear(); // Bütün məlumatları sil
+                }
+            });
+    
+            // Form submit olduqda hər şeyi təmizlə
+            document.getElementById("quiz-form").addEventListener("submit", function () {
+                localStorage.clear();
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>
