@@ -50,9 +50,6 @@ def generate_code():
         quiz_code = str(random.randint(1000, 9999))  # Yeni kod üret
         print(f"Yeni Quiz Kodu: {quiz_code}")  # Konsolda güncellenen kodu göster
 
-# Thread başlat (daemon=True: Flask kapanınca thread de kapanır)
-threading.Thread(target=generate_code, daemon=True).start()
-
 
 with app.app_context():
     db.create_all()
@@ -240,5 +237,7 @@ with app.app_context():
     add_questions()
 
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.32.79', port=5000)
+    threading.Thread(target=generate_code, daemon=True).start()
+    app.run(debug=True, host="0.0.0.0", port=10000)
+
 
