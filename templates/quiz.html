@@ -15,20 +15,6 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='assets/favicon/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/favicon/favicon-16x16.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/resultcc59.css', version='241009') }}">    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.mozRequestFullScreen) { // Firefox
-                elem.mozRequestFullScreen();
-            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { // IE/Edge
-                elem.msRequestFullscreen();
-            }
-        });
-    </script>
     
     <script>
         // Sayfa kapanırken veya sekme değişirken "Reload site?" uyarısını göstermemek için kontrol mekanizması
