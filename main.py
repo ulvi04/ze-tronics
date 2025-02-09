@@ -188,10 +188,10 @@ def quiz():
 
     # Kullanıcının daha önce çözmediği soruları getir
     answered_questions = {ans.question_id for ans in UserAnswer.query.filter_by(user_id=user_id).all()}
-    questions = Question.query.filter(~Question.id.in_(answered_questions)).order_by(db.func.random()).limit(11).all()
+    questions = Question.query.filter(~Question.id.in_(answered_questions)).order_by(db.func.random()).limit(35).all()
 
-    if len(questions) < 11:  # Eğer yeterli yeni soru yoksa, tekrar sorular gösterilebilir
-        questions = Question.query.order_by(db.func.random()).limit(36).all()
+    if len(questions) < 35:  # Eğer yeterli yeni soru yoksa, tekrar sorular gösterilebilir
+        questions = Question.query.order_by(db.func.random()).limit(35).all()
 
     return render_template('quiz.html', questions=questions, name=session.get('name', ''), surname=session.get('surname', ''))
 
