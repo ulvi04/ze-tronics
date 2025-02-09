@@ -84,12 +84,6 @@
         setInterval(function () {
             history.pushState(null, null, location.href);
         }, 1000);
-    
-        // **Form submit işlemlerini ve buton tıklayınca sayfa yenilemeyi engelle**
-        document.addEventListener("submit", function (event) {
-            event.preventDefault();
-            alert("Form gönderimi devre dışı bırakılmıştır!");
-        });
     </script>
     
     
